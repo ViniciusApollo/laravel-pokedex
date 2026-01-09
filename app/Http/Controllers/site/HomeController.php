@@ -17,9 +17,9 @@ class HomeController extends Controller
 
     public function index () {
 
-        $pokemons = $this->pokeApiService->getPokemonList(20, random_int(0, 100));
-        $pokemons = $pokemons['results'];
-
+        $pokemonListInfo = [];
+        $pokemons = $this->pokeApiService->getPokemonList(20, 1, true);
+       
         return view('site.home.index', compact('pokemons'));
     }
 
