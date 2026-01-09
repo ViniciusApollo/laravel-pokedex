@@ -9,14 +9,18 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    protected $PokeApiService;
+    protected $pokeApiService;
 
     public function __construct(PokeApiService $pokeapi) {
-        $this->PokeApiService = $pokeapi;
+        $this->pokeApiService = $pokeapi;
     }
 
     public function index () {
-        return view('site.home.index');
+
+        $pokemons = $this->pokeApiService->getPokemonList(20, random_int(0, 100));
+        $pokemons = $pokemons['results'];
+
+        return view('site.home.index', compact('pokemons'));
     }
 
     public function search() {
